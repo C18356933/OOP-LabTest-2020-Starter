@@ -101,7 +101,21 @@ public class Gantt extends PApplet{
 	}
 
 	public void mouseDragged(){
-		
+		int Num;
+
+		if(clickLeft>-1){
+			Task task = tasks.get(clickLeft);
+			Num=(int)map(mouseX,0,width,0,Number);
+			if(Num>0 && Num<task.getEnd() && task.getEnd()-Num >= 1){
+				task.setStart(Num);
+			}
+		} else if (clickRight>-1) {
+			Task task = tasks.get(clickRight);
+			Num=(int)map(mouseX,0,width,0,Number);
+			if(Num<=30 && Num>task.getStart() && Num-task.getStart() >=1){
+				task.setEnd(Num);
+			}
+		} 
 	}
 	
 	public void setup() {
