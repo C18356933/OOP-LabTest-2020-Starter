@@ -8,6 +8,8 @@ import processing.data.TableRow;
 public class Gantt extends PApplet
 {	
 	public ArrayList<Task> tasks = new ArrayList<Task>();
+	private float Left;
+	private float Margin;
 
 	public void settings()
 	{
@@ -29,6 +31,25 @@ public class Gantt extends PApplet
 		{
 			println(t);
 		}
+	} 
+
+	public void displayTasks(){
+		int Number=30;
+		float X;
+		float textHeight=0.8f;
+
+		stroke(255);
+		fill(255);
+		textAlign(LEFT);
+
+		for(int i=1;i<=Number;i++)
+		{
+			X=map(i,1,Number,Left,width-Margin);
+			line(X,Margin,X,height-Margin);
+
+			text(i,X,Margin*textHeight);
+		}
+		
 	}
 	
 	public void mousePressed()
@@ -45,12 +66,16 @@ public class Gantt extends PApplet
 	
 	public void setup() 
 	{
+		Left = width / 6;
+		Margin = width / 20;
 		loadTasks();
 		printTasks();
 	}
 	
 	public void draw()
 	{			
+		colorMode(HSB);
 		background(0);
+		displayTasks();
 	}
 }
