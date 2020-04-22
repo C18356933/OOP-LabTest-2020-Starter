@@ -73,7 +73,31 @@ public class Gantt extends PApplet{
 	
 	public void mousePressed()
 	{
-		
+		float pixels=20;
+		float rectHeight=50;
+		float rectangleBottom;
+		float rectangleRight;
+		float rectangleLeft;
+		float rectangleTop;
+
+		for(int i =0;i<tasks.size();i++){
+			Task task = tasks.get(i);
+			rectangleRight=map(task.getEnd(),1,Number,Left, width-Margin);
+			rectangleLeft=map(task.getStart(),1,Number,Left,width-Margin);
+			rectangleTop=map(i,0,tasks.size(),2*Margin,height-Margin)-rectHeight/2;
+			rectangleBottom= rectangleTop + rectHeight;
+
+			if(mouseY>=rectangleTop && mouseY<=rectangleBottom){
+				if(mouseX < rectangleRight+pixels && mouseX > rectangleRight-pixels){
+					clickRight = i;
+					clickLeft = -1;
+				}
+				else if(mouseX < rectangleLeft+pixels && mouseX > rectangleLeft-pixels){
+					clickRight = -1;
+					clickLeft = i;
+				}
+			}
+		}
 	}
 
 	public void mouseDragged(){
